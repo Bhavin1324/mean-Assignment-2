@@ -5,6 +5,7 @@ const express = require('express');
 const connectDB = require('./db/connection');
 const FileNotFound = require('./middlewares/not-found');
 const studentRouter = require('./routes/studentRouter');
+const customErrorhandler = require('./middlewares/error-handler');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -20,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 // setting up common route for th API
 app.use('/api/v1/students', studentRouter);
 app.use(FileNotFound);
-
+app.use(customErrorhandler)
 const start = async () => {
     try {
         await connectDB(process.env.MONGO_URI)

@@ -15,7 +15,7 @@
 
     <div class="container mt-5 border rounded-3 p-4 shadow">
         <h1 class="display-3 my-2">Student Login</h1>
-        <form>
+        <form method="post">
             <div class="mb-3">
                 <label for="stud-email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="stud-email" name="email" aria-describedby="emailHelp">
@@ -26,7 +26,7 @@
                 <input type="password" class="form-control" name="password" id="stud-pass">
                 <span class="error-label text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" id="btn-submit" class="btn btn-primary">Login</button>
         </form>
     </div>
 </body>
