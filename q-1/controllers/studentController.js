@@ -32,7 +32,6 @@ const creatStudent = async (req, res) => {
 
 const loginUser = async (req, res) => {
     let { email, password } = req.body;
-    console.log(req.body)
     if (!email || !password) {
         throw new BadRequest("Invalid Login Credetials")
     }
@@ -40,8 +39,8 @@ const loginUser = async (req, res) => {
     if (_.isEmpty(userAlreadyExist)) {
         throw new BadRequest("Unregistered user trying to login");
     }
-    password = cryptr.decrypt(userAlreadyExist.password);
-    if (!(userAlreadyExist.email === email && userAlreadyExist.password === password)) {
+    const decExistPass = cryptr.decrypt(userAlreadyExist[0].password)
+    if (!(userAlreadyExist[0].email === email && decExistPass === password)) {
         throw new BadRequest("Invalid email and password");
     }
     const token = jwt.sign({ id: new Date().getTime().toString(), email: email }, process.env.JWT_SECRET, { expiresIn: '30d' })
