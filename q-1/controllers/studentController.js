@@ -1,7 +1,7 @@
 const Students = require('../model/student');
 const { StatusCodes } = require('http-status-codes');
 const Cryptr = require('cryptr');
-const { BadRequest, AlreadyExsit } = require('../errors');
+const { BadRequest, AlreadyExsit, UnAuthenticated } = require('../errors');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const cryptr = new Cryptr(process.env.CRYPTR_SECRET);
@@ -37,7 +37,7 @@ const loginUser = async (req, res) => {
     }
     const userAlreadyExist = await Students.find({ email: email });
     if (_.isEmpty(userAlreadyExist)) {
-        throw new BadRequest("Unregistered user trying to login");
+        throw new UnAuthenticated("Unregistered user trying to login");
     }
     const decExistPass = cryptr.decrypt(userAlreadyExist[0].password)
     if (!(userAlreadyExist[0].email === email && decExistPass === password)) {
