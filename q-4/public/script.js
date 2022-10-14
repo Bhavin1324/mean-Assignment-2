@@ -2,6 +2,7 @@ const emailBox = document.querySelector('#stud-email');
 const passBox = document.querySelector('#stud-pass');
 const btnSubmit = document.querySelector("#btn-submit");
 let errorText = document.querySelector(".error-text");
+
 btnSubmit.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
@@ -36,7 +37,6 @@ btnSubmit.addEventListener('click', async (e) => {
             errorText.classList.add('d-none')
             errorText.textContent = "";
             localStorage.setItem('token', token);
-            location.replace('./dashboard.ejs');
         }
     }
     catch (ex) {

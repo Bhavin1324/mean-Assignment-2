@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./q-1/app.js"
+    "start": "nodemon ./q-3/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.2.0",
+    "cors": "^2.8.5",
     "cryptr": "^6.0.3",
     "dotenv": "^16.0.2",
     "ejs": "^3.1.8",
@@ -22,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongoose": "^6.5.4",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "sweetalert2": "^11.5.1"
   }
 }

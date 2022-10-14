@@ -9,8 +9,9 @@ const cryptr = new Cryptr(process.env.CRYPTR_SECRET);
 const getAllStudents = async (req, res) => {
 
     const data = await Students.find({});
-    return res.status(StatusCodes.OK).json({ data: data, decode: decode });
-}
+    return res.status(StatusCodes.OK).json({ data: data });
+    // res.render('../views/dashboard',{ data: data, decode: decode });
+}   
 
 const creatStudent = async (req, res) => {
     const { email, password } = req.body;
