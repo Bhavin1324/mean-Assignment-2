@@ -3,6 +3,13 @@ const passBox = document.querySelector('#stud-pass');
 const btnSubmit = document.querySelector("#btn-submit");
 let errorText = document.querySelector(".error-text");
 
+function displayError(msg) {
+    errorText.classList.remove('d-none');
+    errorText.classList.add('d-block');
+    errorText.previousElementSibling.classList.add('error');
+    errorText.textContent = msg;
+}
+
 btnSubmit.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
@@ -13,22 +20,13 @@ btnSubmit.addEventListener('click', async (e) => {
         })
         switch (response.status) {
             case 400:
-                errorText.classList.remove('d-none');
-                errorText.classList.add('d-block');
-                errorText.previousElementSibling.classList.add('error');
-                errorText.textContent = "Invalid username or password";
+                displayError("Invalid username or password");
                 break;
             case 401:
-                errorText.classList.remove('d-none');
-                errorText.classList.add('d-block');
-                errorText.previousElementSibling.classList.add('error');
-                errorText.textContent = "Unregistered User trying to login";
+                displayError("Unregistered user trying to login");
                 break;
             case 500:
-                errorText.classList.remove('d-none');
-                errorText.classList.add('d-block');
-                errorText.previousElementSibling.classList.add('error');
-                errorText.textContent = "Internal server error";
+                displayError("Ooops! internal server error");
                 break;
         }
         const { token } = await response.json();

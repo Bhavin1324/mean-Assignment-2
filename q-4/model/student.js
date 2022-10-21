@@ -19,6 +19,5 @@ const studentSchema = new mongoose.Schema({
         type: String,
         require: [`Must enter the password`, true]
     }
-}
-)
+})
 module.exports = mongoose.model("student", studentSchema);

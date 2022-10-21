@@ -1,5 +1,5 @@
 require('express-async-errors');
-require('dotenv').config({ path: './q-4/.env' });
+require('dotenv').config({ path: './q-5-backend/.env' });
 const path = require('path');
 const express = require('express');
 const connectDB = require('./db/connection');
@@ -10,19 +10,11 @@ const app = express();
 const helmet = require('helmet');
 const ejs = require('ejs');
 const cors = require('cors');
-const session = require("express-session");
 
 //Port variable
 const port = process.env.PORT || 5000;
 
-app.use(session({
-    secret: "session-rsa-key",
-    saveUninitialized: false,
-    resave: false
-}))
-
 app.set('view engine', 'ejs')
-app.set("views", path.join(__dirname, 'views'));
 // adding bootstrap
 app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
@@ -36,8 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // setting up common route for th API
-// app.use('/api/v1/students', studentRouter);
-app.use('/', studentRouter);
+app.use('/api/v1/students', studentRouter);
 
 //Error handlers
 app.use(FileNotFound);

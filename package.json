@@ -5,19 +5,24 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./q-3/app.js"
+    "start5": "nodemon ./q-5-backend/app.js",
+    "start4": "nodemon ./q-4/app.js",
+    "start2": "nodemon ./q-2/app.js",
+    "start1": "nodemon ./q-1/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.2.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cryptr": "^6.0.3",
     "dotenv": "^16.0.2",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
+    "express-session": "^1.17.3",
     "helmet": "^6.0.0",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
