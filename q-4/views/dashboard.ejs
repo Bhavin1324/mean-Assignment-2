@@ -54,12 +54,14 @@
                     <a href="/update/<%=student.data[i].rollno%>">Edit</a>
                 </td>
                 <td>
-                    <a href="">Delete</a>
+                    <a href="/delete/<%=student.data[i].rollno%>">Delete</a>
                 </td>
             </tr>
             <%}%>
     </table>
-    <button class="btn">Logout</button>
+    <form action="/logout" method="post">
+        <button class="btn">Logout</button>
+    </form>
 </body>
 
 </html>

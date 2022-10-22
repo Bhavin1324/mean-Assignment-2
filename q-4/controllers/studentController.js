@@ -31,7 +31,7 @@ const creatStudent = async (req, res) => {
     if (data)
         res.redirect("dashboard");
     else
-        res.render('login', { err: "Unable to insert record" })
+        res.render('dashboard', { err: "Unable to insert record" })
 }
 
 const loginUser = async (req, res) => {
@@ -53,12 +53,32 @@ const loginUser = async (req, res) => {
     res.redirect("dashboard");
 }
 
+const updateStudent = async (req, res) => {
+    const { email, password, name, rollno } = req.body;
+    if (!email || !password || !name || !rollno) {
+        throw new BadRequest("Please enter valid credentials");
+    }
+    const encPassword = cryptr.encrypt(req.body.password);
+    req.body.password = encPassword;
+    console.log(req.body);
+    const data = await Students.findOneAndUpdate({ rollno: req.body.rollno }, req.body, { runValidators: true });
+    console.log(data);
+    res.redirect("dashboard");
+}
+
 const renderSingleStudent = async (req, res) => {
     const { id } = req.params;
     const data = await Students.findOne({ rollno: id });
-    res.render("update", data);
+    if (!data) {
+        res.send("Unable to find such book");
+    }
+    res.render(`update`, { data: data });
 }
-// ! Working on update
+const deleteStudent = async (req, res) => {
+    const { id } = req.params;
+    await Students.findOneAndDelete({ rollno: id });
+    res.redirect("/dashboard");
+}
 // rendering pages only
 const renderLoginPage = (req, res) => {
     res.render('index');
@@ -66,4 +86,4 @@ const renderLoginPage = (req, res) => {
 const renderInsert = (req, res) => {
     res.render('insert');
 }
-module.exports = { renderInsert, renderDashboard, creatStudent, loginUser, renderLoginPage, renderSingleStudent }
+module.exports = { renderInsert, renderDashboard, creatStudent, loginUser, renderLoginPage, renderSingleStudent, updateStudent, deleteStudent }

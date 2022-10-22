@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <form action="/update" method="post">
+    <form action="/edit" method="post">
         <div>
             <label for="rollno">Rollno: </label>
-            <input type="number" name="rollno" id="rollno" value="<%=data.rollno%>">
+            <input type="number" name="rollno" id="rollno" value="<%=data.rollno%>" readonly>
         </div>
         <div>
             <label for="name">Name: </label>
@@ -23,8 +23,8 @@
             <input type="email" name="email" id="email" placeholder="example@email.com" value="<%=data.email%>">
         </div>
         <div>
-            <label for="password">Create password: </label>
-            <input type="password" name="password" id="password" value="<%=data.password%>">
+            <label for="password">Update password: </label>
+            <input type="password" name="password" id="password">
         </div>
         <div> <button type="submit">Update</button></div>
     </form>
