@@ -8,13 +8,11 @@ const studentRouter = require('./routes/studentRouter');
 const customErrorhandler = require('./middlewares/error-handler');
 const app = express();
 const helmet = require('helmet');
-const ejs = require('ejs');
 const cors = require('cors');
 
 //Port variable
 const port = process.env.PORT || 5000;
 
-app.set('view engine', 'ejs')
 // adding bootstrap
 app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));

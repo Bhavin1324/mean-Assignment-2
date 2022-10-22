@@ -1,43 +1,24 @@
-const router = require("express").Router()
-const multer = require("multer")
-const path = require("path")
+require("dotenv").config({ path: "./q-1/.env" });
+const express = require("express");
+const app = express();
+const connectDB = require("./db/connection");
+const commonRouter = require("./routes/commonRouter");
+const ejs = require("ejs");
+const path = require("path");
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, path.join(__dirname, "../public/uploads/gallery"))
-//     },
-//     filename: function (req, file, cb) {
-// if (file.mimetype !== "jpg" || file.mimetype !== "jpeg") {
-//     cb(new Error("Invalid MimeType"))
-// }
-//             cb(null, Date.now() + "_" + file.originalname)
-//     }
-// })
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../public/uploads/profile"))
-    },
-    filename: function (req, file, cb) {
-        console.log(file);
-        if (file.mimetype !== "jpg" || file.mimetype !== "jpeg") {
-            return cb("Invalid File Format")
-        }
-        cb(null, Date.now() + "_" + file.originalname)
+const port = process.env.PORT || 5000;
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./q-1/views"))
+
+app.use("/", commonRouter);
+
+const start = async () => {
+    try {
+        await connectDB(process.env.MONGO_URI);
+        app.listen(port, console.log(`Server is listening on port ${port}`))
     }
-})
-
-const upload = multer({ storage: storage })
-
-router.get("/", (req, res) => {
-    res.render("index")
-})
-
-//upload.array("file control name", number of max images)
-router.post("/multipleUpload", upload.array("multipleImage", 3), (req, res) => {
-    res.redirect("/")
-})
-router.post("/", upload.single("singleImage"), (req, res) => {
-    res.redirect("/")
-})
-
-module.exports = router
+    catch (ex) {
+        console.log(ex);
+    }
+}
+start();
