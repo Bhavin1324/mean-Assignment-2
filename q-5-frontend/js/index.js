@@ -13,8 +13,9 @@ function displayError(msg) {
 btnSubmit.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch('/api/v1/students/login', {
+        const response = await fetch('http://localhost:5000/api/v1/students/login', {
             method: 'POST',
+            mode: "cors",
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ email: emailBox.value, password: passBox.value })
         })
@@ -35,6 +36,7 @@ btnSubmit.addEventListener('click', async (e) => {
             errorText.classList.add('d-none')
             errorText.textContent = "";
             localStorage.setItem('token', token);
+            location.replace('./dashboard.html');
         }
     }
     catch (ex) {

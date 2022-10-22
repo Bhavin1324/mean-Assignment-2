@@ -9,6 +9,7 @@ const auth = (req, res, next) => {
     try {
 
         decode = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decode.email;
         next();
     }
 

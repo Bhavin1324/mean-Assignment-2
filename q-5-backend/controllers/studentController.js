@@ -9,7 +9,7 @@ const cryptr = new Cryptr(process.env.CRYPTR_SECRET);
 const getAllStudents = async (req, res) => {
 
     const data = await Students.find({});
-    return res.status(StatusCodes.OK).json({ data: data });
+    return res.status(StatusCodes.OK).json({ data: data, email: req.user });
 }
 
 const creatStudent = async (req, res) => {
