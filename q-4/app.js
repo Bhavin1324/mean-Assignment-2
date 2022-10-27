@@ -11,6 +11,7 @@ const helmet = require('helmet');
 const ejs = require('ejs');
 const cors = require('cors');
 const session = require("express-session");
+const FileStore = require("session-file-store")(session);
 
 //Port variable
 const port = process.env.PORT || 5000;
@@ -18,7 +19,8 @@ const port = process.env.PORT || 5000;
 app.use(session({
     secret: "session-rsa-key",
     saveUninitialized: false,
-    resave: false
+    resave: false,
+    store: new FileStore({ path: `./q-4/session-data` })
 }))
 
 app.set('view engine', 'ejs')

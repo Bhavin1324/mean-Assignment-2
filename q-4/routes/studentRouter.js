@@ -10,6 +10,14 @@ router.route('/update/:id').get(auth, renderSingleStudent);
 router.route("/edit").post(auth, updateStudent);
 router.route("/delete/:id").get(auth, deleteStudent);
 router.post("/logout", (req, res) => {
-
+    req.session.destroy((err) => {
+        if (!err) {
+            res.clearCookie("connect.sid");
+            res.render("index")
+        }
+        else {
+            res.render("dashboard", { err: "Enable to logout" });
+        }
+    })
 })
 module.exports = router;
