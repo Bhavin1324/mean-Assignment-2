@@ -3,12 +3,20 @@ const express = require("express");
 const app = express();
 const connectDB = require("./db/connection");
 const commonRouter = require("./routes/commonRouter");
-const ejs = require("ejs");
 const path = require("path");
 
 const port = process.env.PORT || 5000;
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "./q-1/views"))
+app.set("views", path.join(__dirname, "views"))
+
+// middlewares
+app.use(express.static("./q-1/public"));
+app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/", commonRouter);
 
